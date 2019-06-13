@@ -11,7 +11,7 @@ import scrapy
 class RamenItem(scrapy.Item):
     date = scrapy.Field()
     ramen_name = scrapy.Field()
-    ramen_area = scrapy.Field()
-    ramen_train = scrapy.Field()
     ramen_url = scrapy.Field()
+    ramen_point = scrapy.Field()
+    ramen_area = scrapy.Field()
     pass
