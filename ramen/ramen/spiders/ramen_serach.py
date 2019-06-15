@@ -21,8 +21,12 @@ class RamenSerachSpider(scrapy.Spider):
         extractは指定した要素を取得。この場合は指定した要素の全てを取得するため、事前にn番目を選択する方法もある。
         '''
         ramen_data = response.css('div#contents-basic div.wrap ul#searched li')
+        rank = 0
         for data in ramen_data:
             date = datetime.date.today()
+            rank += 1
+            rank_str = rank
+            rank_str = str(rank_str) + '位'
             name = data.css('div h4 a::text').extract_first()
             url = data.css('div h4 a::attr(href)').extract_first()
             url = response.urljoin(url)
@@ -36,6 +40,7 @@ class RamenSerachSpider(scrapy.Spider):
                 area = prefecture + city
             yield RamenItem(
                 date = date,
+                rank = rank_str,
                 ramen_name = name,
                 ramen_url = url,
                 ramen_point = point,
